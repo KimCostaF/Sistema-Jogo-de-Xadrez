@@ -1,5 +1,6 @@
 package Xadrez.PeçasXadrez;
 
+import TabuleiroJogo.Posicao;
 import TabuleiroJogo.Tabuleiro;
 import Xadrez.Cor;
 import Xadrez.PecaXadrez;
@@ -12,5 +13,59 @@ public class Torre extends PecaXadrez {
     @Override
     public String toString() {
         return "T";
+    }
+
+    @Override
+    public boolean[][] acoesPossiveis() {
+        boolean[][] mat = new boolean[getTabuleiro().getLinhas()][getTabuleiro().getColunas()];
+
+        Posicao p = new Posicao(0,0);
+
+        //Movimentação vertical cima
+        p.setValores(posicao.getLinha()-1,posicao.getColuna());
+        while(getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setLinha(p.getLinha()-1);
+        }
+        if (getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+        // Movimentação horizontal esquerda
+        p.setValores(posicao.getLinha(),posicao.getColuna()-1);
+        while(getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setColuna(p.getColuna()-1);
+        }
+        if (getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+        //Movimentação horizontal direita
+        p.setValores(posicao.getLinha() + 1,posicao.getColuna());
+        while(getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setLinha(p.getLinha()+1);
+        }
+        if (getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+        //Movimentação vertical baixo
+        p.setValores(posicao.getLinha()+1,posicao.getColuna());
+        while(getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+            p.setLinha(p.getLinha()+1);
+        }
+        if (getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
+            mat[p.getLinha()][p.getColuna()] = true;
+        }
+
+
+
+
+
+
+        return mat;
     }
 }
