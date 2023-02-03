@@ -1,5 +1,6 @@
 package application;
 
+import Xadrez.PartidaXadrez;
 import Xadrez.PecaXadrez;
 import Xadrez.Cor;
 import Xadrez.PosicaoXadrez;
@@ -31,6 +32,13 @@ public class UI {
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public static void imprimirPartida(PartidaXadrez partidaXadrez){
+        printTabuleiro(partidaXadrez.getPecas());
+        System.out.println();
+        System.out.println("Turno :" + partidaXadrez.getTurno());
+        System.out.println("Jogador no aguardo: " +partidaXadrez.getJogadorAtual());
     }
 
     public static PosicaoXadrez lerPosicaoXadrez(Scanner scanner){
