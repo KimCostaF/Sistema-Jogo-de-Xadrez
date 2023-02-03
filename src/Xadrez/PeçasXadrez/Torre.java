@@ -42,10 +42,10 @@ public class Torre extends PecaXadrez {
         }
 
         //Movimentação horizontal direita
-        p.setValores(posicao.getLinha() + 1,posicao.getColuna());
+        p.setValores(posicao.getLinha(),posicao.getColuna()+1);
         while(getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
             mat[p.getLinha()][p.getColuna()] = true;
-            p.setLinha(p.getLinha()+1);
+            p.setColuna(p.getColuna()+1);
         }
         if (getTabuleiro().posicaoExiste(p) && !getTabuleiro().possuiPeca(p)){
             mat[p.getLinha()][p.getColuna()] = true;
