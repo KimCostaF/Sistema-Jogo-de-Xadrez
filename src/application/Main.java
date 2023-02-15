@@ -18,7 +18,7 @@ public class Main {
         PartidaXadrez partidaXadrez = new PartidaXadrez();
         List<PecaXadrez> Capturada = new ArrayList<>();
         while (true){
-            try{
+             try{
                 UI.clearScreen();
                 UI.imprimirPartida(partidaXadrez,Capturada  );
                 System.out.println();
@@ -42,16 +42,18 @@ public class Main {
             }
 
 
-            catch (XadrezException e){
+        catch (XadrezException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
-            catch (InputMismatchException e){
+        catch (InputMismatchException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
 
         }
+
+
 
 
     }

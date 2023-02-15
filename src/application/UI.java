@@ -44,6 +44,9 @@ public class UI {
         System.out.println();
         System.out.println("Turno :" + partidaXadrez.getTurno());
         System.out.println("Jogador no aguardo: " +partidaXadrez.getJogadorAtual());
+        if (partidaXadrez.getChequemate()){
+            System.out.println("JOGADOR ESTA EM CHEQUE");
+        }
     }
 
     public static PosicaoXadrez lerPosicaoXadrez(Scanner scanner){
