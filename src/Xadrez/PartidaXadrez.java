@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 public class PartidaXadrez {
     private int turno;
     private Cor jogadorAtual;
+    private boolean cheque;
+
     private boolean chequemate;
     private Tabuleiro tabuleiro;
     private List<Peca> pecasTabuleiro = new ArrayList<>();
@@ -29,7 +31,7 @@ public class PartidaXadrez {
         return turno;
     }
 
-    public Cor getJogadorAtual() {
+    public Cor  getJogadorAtual() {
         return jogadorAtual;
     }
 
@@ -41,6 +43,10 @@ public class PartidaXadrez {
             }
         }
         return mat;
+    }
+
+    public boolean getCheque(){
+        return cheque;
     }
 
     public boolean getChequemate(){
@@ -59,12 +65,19 @@ public class PartidaXadrez {
         validarPosicaoOrigem(origem);
         validarPosicaoDestino(origem,destino);
         Peca pecaCapturada = acaoMover(origem,destino);
-        if (Testechequemate(jogadorAtual)){
+        if (Testecheque(jogadorAtual)){
             desfazerAcao(origem,destino,pecaCapturada);
             throw new XadrezException("O jogador não pode se colocar em chequemate");
         }
-        chequemate = (Testechequemate(oponente(jogadorAtual)))?true:false;
-        proximoTurno();
+        cheque = (Testecheque(oponente(jogadorAtual)))?true:false;
+
+        if (Testechequemate(oponente(jogadorAtual))){
+            chequemate = true;
+        }else {
+            proximoTurno();
+        }
+
+
         return (PecaXadrez) pecaCapturada;
     }
 
@@ -134,7 +147,7 @@ public class PartidaXadrez {
         throw new IllegalStateException("Não há rei da cor "+cor+" no tabuleiro");
     }
 
-    private boolean Testechequemate(Cor cor){
+    private boolean Testecheque(Cor cor){
         Posicao posicaorei = rei(cor).getPosicaoXadrez().toPosicao();
         List<Peca> pecasoponente = pecasTabuleiro.stream().filter(x->((PecaXadrez)x).getCor()==oponente(cor)).collect(Collectors.toList());
         for(Peca p: pecasoponente){
@@ -147,6 +160,35 @@ public class PartidaXadrez {
         return false;
     }
 
+    private boolean Testechequemate(Cor cor){
+        if (!Testecheque(cor)){
+            return false;
+        }
+        List<Peca> lista = pecasTabuleiro.stream().filter(x->((PecaXadrez)x).getCor()==cor).collect(Collectors.toList());
+        for (Peca p : lista){
+            boolean[][] mat = p.acoesPossiveis();
+            for (int i=0;i<tabuleiro.getLinhas();i++){
+                for (int j=0;j<tabuleiro.getColunas();j++){
+                    if (mat[i][j]){
+                        Posicao origem  = ((PecaXadrez)p).getPosicaoXadrez().toPosicao();
+                        Posicao destino = new Posicao(i,j);
+                        Peca pecacapturada = acaoMover(origem,destino);
+                        boolean testeCheque = Testecheque(cor);
+                        desfazerAcao(origem,destino,pecacapturada);
+                        if (!testeCheque){
+                            return false;
+                        }
+                    }
+                }
+            }
+
+
+        }
+        return true;
+    }
+
+    //Preparacao inicial das peças
+    /*
     private void preparacaoInicial(){
         colocarNovaPeca('c',1,new Torre(tabuleiro,Cor.Branco));
         colocarNovaPeca('c',2,new Torre(tabuleiro,Cor.Branco));
@@ -161,6 +203,20 @@ public class PartidaXadrez {
         colocarNovaPeca('e',7,new Torre(tabuleiro,Cor.Preto));
         colocarNovaPeca('e',8,new Torre(tabuleiro,Cor.Preto));
         colocarNovaPeca('d',8,new Rei(tabuleiro,Cor.Preto));
+
+    }
+
+     */
+
+    //outro metodo de preparacao porem facilitando um cheque mate
+    private void preparacaoInicial(){
+        colocarNovaPeca('h',7,new Torre(tabuleiro,Cor.Branco));
+        colocarNovaPeca('d',1,new Torre(tabuleiro,Cor.Branco));
+        colocarNovaPeca('e',1,new Rei(tabuleiro,Cor.Branco));
+
+        colocarNovaPeca('b',8,new Torre(tabuleiro,Cor.Preto));
+        colocarNovaPeca('a',8,new Rei(tabuleiro,Cor.Preto));
+
 
     }
 }

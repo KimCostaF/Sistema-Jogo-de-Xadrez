@@ -43,10 +43,18 @@ public class UI {
         pecasCapturadas(capturada);
         System.out.println();
         System.out.println("Turno :" + partidaXadrez.getTurno());
-        System.out.println("Jogador no aguardo: " +partidaXadrez.getJogadorAtual());
-        if (partidaXadrez.getChequemate()){
-            System.out.println("JOGADOR ESTA EM CHEQUE");
+        if (!partidaXadrez.getChequemate()){
+            System.out.println("Jogador no aguardo: " +partidaXadrez.getJogadorAtual());
+            if (partidaXadrez.getCheque()){
+                System.out.println("JOGADOR ESTA EM CHEQUE");
+            }
         }
+        else{
+            System.out.println("CHEQUEMATE");
+            System.out.println("Vencedor: " + partidaXadrez.getJogadorAtual());
+        }
+
+
     }
 
     public static PosicaoXadrez lerPosicaoXadrez(Scanner scanner){

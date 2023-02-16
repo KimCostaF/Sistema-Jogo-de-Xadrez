@@ -17,7 +17,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         PartidaXadrez partidaXadrez = new PartidaXadrez();
         List<PecaXadrez> Capturada = new ArrayList<>();
-        while (true){
+        while (!partidaXadrez.getChequemate()){
              try{
                 UI.clearScreen();
                 UI.imprimirPartida(partidaXadrez,Capturada  );
@@ -52,6 +52,9 @@ public class Main {
             }
 
         }
+        UI.clearScreen();
+        UI.imprimirPartida(partidaXadrez,Capturada);
+
 
 
 
