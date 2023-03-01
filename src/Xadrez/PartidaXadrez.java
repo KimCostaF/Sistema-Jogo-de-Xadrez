@@ -3,6 +3,7 @@ package Xadrez;
 import TabuleiroJogo.Peca;
 import TabuleiroJogo.Posicao;
 import TabuleiroJogo.Tabuleiro;
+import Xadrez.PeçasXadrez.Peao;
 import Xadrez.PeçasXadrez.Rei;
 import Xadrez.PeçasXadrez.Torre;
 
@@ -211,6 +212,7 @@ public class PartidaXadrez {
      */
 
     //outro metodo de preparacao porem facilitando um cheque mate
+    /*
     private void preparacaoInicial(){
         colocarNovaPeca('h',7,new Torre(tabuleiro,Cor.Branco));
         colocarNovaPeca('d',1,new Torre(tabuleiro,Cor.Branco));
@@ -219,6 +221,34 @@ public class PartidaXadrez {
         colocarNovaPeca('b',8,new Torre(tabuleiro,Cor.Preto));
         colocarNovaPeca('a',8,new Rei(tabuleiro,Cor.Preto));
 
+
+    }
+     */
+
+    private void preparacaoInicial(){
+        colocarNovaPeca('a',1,new Torre(tabuleiro,Cor.Branco));
+        colocarNovaPeca('e',1,new Rei(tabuleiro,Cor.Branco));
+        colocarNovaPeca('h',1,new Torre(tabuleiro,Cor.Branco));
+        colocarNovaPeca('a',2,new Peao(tabuleiro,Cor.Branco));
+        colocarNovaPeca('b',2,new Peao(tabuleiro,Cor.Branco));
+        colocarNovaPeca('c',2,new Peao(tabuleiro,Cor.Branco));
+        colocarNovaPeca('d',2,new Peao(tabuleiro,Cor.Branco));
+        colocarNovaPeca('e',2,new Peao(tabuleiro,Cor.Branco));
+        colocarNovaPeca('f',2,new Peao(tabuleiro,Cor.Branco));
+        colocarNovaPeca('g',2,new Peao(tabuleiro,Cor.Branco));
+        colocarNovaPeca('h',2,new Peao(tabuleiro,Cor.Branco));
+
+        colocarNovaPeca('a',8,new Torre(tabuleiro,Cor.Preto));
+        colocarNovaPeca('e',8,new Rei(tabuleiro,Cor.Preto));
+        colocarNovaPeca('h',8,new Torre(tabuleiro,Cor.Preto));
+        colocarNovaPeca('a',7,new Peao(tabuleiro,Cor.Preto));
+        colocarNovaPeca('b',7,new Peao(tabuleiro,Cor.Preto));
+        colocarNovaPeca('c',7,new Peao(tabuleiro,Cor.Preto));
+        colocarNovaPeca('d',7,new Peao(tabuleiro,Cor.Preto));
+        colocarNovaPeca('e',7,new Peao(tabuleiro,Cor.Preto));
+        colocarNovaPeca('f',7,new Peao(tabuleiro,Cor.Preto));
+        colocarNovaPeca('g',7,new Peao(tabuleiro,Cor.Preto));
+        colocarNovaPeca('h',7,new Peao(tabuleiro,Cor.Preto));
 
     }
 }
